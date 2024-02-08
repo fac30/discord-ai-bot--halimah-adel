@@ -90,6 +90,19 @@ client.on('messageCreate', async msg => {
 		console.log(JSON.stringify(chatCompletion, null, 2));
 
 		msg.reply(response);
+
+		// Direct message the user
+		user.send('Hello!')
+			.then(message => console.log(`Sent message: ${message.content} to ${user.tag}`))
+			.catch(console.error);
+        // try {
+		// if (msg.guild) {
+        //     // Only attempt to send a direct message if the message is from a guild channel
+        //     const user = await msg.author.fetch();
+        //     user.send(`In response to your message: "${msg.content}", the AI says: "${response}"`);
+        // }} catch (error) {
+		// 	console.error('Error sending direct message:', error);
+		// }
 	}
 	catch (error) {
 		console.error('OpenAI Error:', error);
