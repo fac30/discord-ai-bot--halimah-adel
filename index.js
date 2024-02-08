@@ -36,11 +36,47 @@ client.on('messageCreate', async msg => {
 		msg.reply('Hey!');
 	}
 
+	// Show the bot typing as we wait for a response
+	await msg.channel.sendTyping();
+
+	// Empty array to contain whole conversation, so bot can refer back
+	const conversation = [];
+
+	// Fetches last 10 messages from the channel
+	try {
+		const conversationHistory = await msg.channel.messages.fetch({ limit: 10});
+		conversationHistory.reverse();
+
+		// For each message fetched, it checks who sent it and pushes to the conversation array
+		conversationHistory.forEach((message) => {
+			if (message.author.bot && message.author.id !== client.user.id) return;
+
+			// If the author is our bot
+			if (message.author.id === client.user.id) {
+				conversation.push({
+					role: 'assistant',
+					content: message.content,
+				});
+				return;
+			}
+
+			// Otherwise, the author is a user
+			conversation.push({
+				role: 'user',
+				content: message.content,
+			});
+		});
+	}
+	catch (error) {
+		console.error('Conversation history error:', error);
+		msg.reply('An error occured while fetching message history. Please try again later.')
+	}
+
 	// Connect to OpenAI with Error Handling
 	try {
 		const chatCompletion = await openai.chat.completions.create({
 	  		model: 'gpt-3.5-turbo-1106',
-			messages: [{ role: 'user', content: msg.content }],
+			messages: conversation, // Changed to capture the conversation history from the array above
 			max_tokens: 25,
 		});
 
