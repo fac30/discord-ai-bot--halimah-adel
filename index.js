@@ -31,6 +31,9 @@ client.on('messageCreate', async msg => {
 	// Ignore messages from bots and empty messages
 	if (msg.author.bot || !msg.content) return;
 
+	// Ignore message if it doesn't start with !
+	if (!msg.content.startsWith('!')) return;
+
 	// Test chat connection
 	if (msg.content === '!hello') {
 		msg.reply('Hey!');
