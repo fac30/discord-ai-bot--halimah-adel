@@ -9,7 +9,7 @@ const token = process.env.TOKEN;
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
-    //GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.MessageContent
   ]
@@ -32,25 +32,31 @@ client.on('messageCreate', async msg => {
 
   // Test chat connection
   if (msg.content === '!hello') {
-    //msg.reply('Hey!');
-	msg.channel.send('Halliioo');
+    msg.reply('Hey!');
+	//msg.channel.send('Halliioo');
   }
 
   // Connect to OpenAI with Error Handling
   try {
     const chatCompletion = await openai.chat.completions.create({
 	  model: 'gpt-3.5-turbo-1106',
-      messages: [{ role: 'user', content: 'Say this is a test' }],
-      max_tokens: 10
+      messages: [{ role: 'user', content: msg.content }],
+      max_tokens: 25
     });
 
-    // Console log the chatCompletion in JSON
-    console.log(JSON.stringify(chatCompletion, null, 2));
-    //msg.reply(chatCompletion.choices[0].message.content);
-	msg.channel.send(chatCompletion.choices[0].message.content);
+	const response = chatCompletion.choices[0].message.content;
+    // Console log the chatCompletion respond
+	console.log('OpenAI Response:', response);
+	
+	console.log(JSON.stringify(chatCompletion, null, 2));
+    
+	msg.reply(response);
+	//msg.channel.send(response);
 
   } catch (error) {
-      console.error('OpenAI Error:', error.message);
+      console.error('OpenAI Error:', error);
+	  msg.reply('An error occurred while processing your request. Please try again later.');
+	  //msg.channel.send('An error occurred while processing your request. Please try again later.');
   	}
 });
 
