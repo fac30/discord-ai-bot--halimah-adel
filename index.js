@@ -79,7 +79,7 @@ client.on('messageCreate', async msg => {
 	try {
 		const chatCompletion = await openai.chat.completions.create({
 	  		model: 'gpt-3.5-turbo-1106',
-			messages: conversation, // Changed to capture the conversation history from the array above
+			messages: conversation,
 			max_tokens: 25,
 		});
 
