@@ -218,6 +218,8 @@ And online tutorials. Thanks to the following creators for their excellent tutor
 * UnderCtrl: creating a [Chat GPT Discord bot](https://www.youtube.com/watch?v=EUlnKW6Yy94&t=1053s)
 * Omnidev: creating a [Discord AI chat bot](https://www.youtube.com/watch?v=TVDHpjLymiM&t=301s)
 
+And, of course, huge thanks to [othneildrew](https://github.com/othneildrew) for the comprehensive [README template](https://github.com/othneildrew/Best-README-Template) that we built this README with!
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
