@@ -63,13 +63,7 @@
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
-      </ul>
-    </li>
-    <li><a href="#usage">Usage</a></li>
+    <li><a href="#installation">Installation</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -157,10 +151,24 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Feature 1
-- [ ] Feature 2
-- [ ] Feature 3
-    - [ ] Nested Feature
+- [ ] Set up a new Node.js project with `.env`, `openai` and `discord.js` libraries
+- [ ] Initialise bot and start listening for messages
+- [ ] Add message handling
+- [ ] Optimise event handling
+- [ ] Integrate OpenAI into the bot
+- [ ] Manage OpenAI response
+- [ ] Add command prefix
+- [ ] Implement error handling
+
+### Stretch goals
+
+If we have time, we aim to attempt some of these stretch goals:
+
+- [ ] Enable the bot to message users directly
+- [ ] Implement dialogue boxes and interactive responses
+- [ ] Create private channels
+- [ ] Automated moderation
+- [ ] Add multimedia responses
 
 See the [open issues](https://github.com/fac30/discord-ai-bot--halimah-adel/issues) for a full list of proposed features (and known issues).
 
@@ -171,10 +179,7 @@ See the [open issues](https://github.com/fac30/discord-ai-bot--halimah-adel/issu
 <!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+If you'd like to contribute to this project, you can fork the project and open a pull request.
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature`)
@@ -186,19 +191,8 @@ Don't forget to give the project a star! Thanks again!
 
 
 
-<!-- LICENSE -->
-## License
-
-Distributed under the MIT License. See `LICENSE.txt` for more information.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
 <!-- CONTACT -->
 ## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
 
 Project Link: [https://github.com/fac30/discord-ai-bot--halimah-adel](https://github.com/fac30/discord-ai-bot--halimah-adel)
 
@@ -209,9 +203,16 @@ Project Link: [https://github.com/fac30/discord-ai-bot--halimah-adel](https://gi
 <!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
-* []()
-* []()
-* []()
+We used a number of resources to understand how to use OpenAI's API and Discord.js to create an AI chat bot. This includes official documentation:
+
+* Discord.js [official documentation](https://discordjs.guide/#before-you-begin)
+* OpenAI [API documentation](https://platform.openai.com/docs/introduction)
+
+And online tutorials. Thanks to the following creators for their excellent tutorials on creating a Discord AI bot:
+
+* Beau Carnes: creating a [Discord bot](https://www.freecodecamp.org/news/create-a-discord-bot-with-javascript-nodejs/)
+* UnderCtrl: creating a [Chat GPT Discord bot](https://www.youtube.com/watch?v=EUlnKW6Yy94&t=1053s)
+* Omnidev: creating a [Discord AI chat bot](https://www.youtube.com/watch?v=TVDHpjLymiM&t=301s)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
