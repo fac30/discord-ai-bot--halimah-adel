@@ -115,17 +115,20 @@ If you want to install this project on your local machine and play around with i
    ```sh
    npm install
    ```
-9. Enter your API and Discord Token in `.env`
+8. Enter your API and Discord Token in `.env`
    ```
    TOKEN=ENTER-TOKEN-HERE
    API_KEY=ENTER-API-KEY-HERE
    ```
-10. Launch your bot in the terminal so it goes online
+9. Launch your bot in the terminal so it goes online
   ```sh
     node index.js
   ```
 
-  (Note: you can optionally install `nodemon` so you don't have to launch your bot in the terminal every time you make a change to the code.)
+  (**Note:** you can optionally install `nodemon` as a global package so you don't have to launch your bot in the terminal every time you make a change to the code.)
+  ```sh
+  npm install -g nodemon
+  ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -152,14 +155,14 @@ Make sure to save after making this change!
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Set up a new Node.js project with `.env`, `openai` and `discord.js` libraries
-- [ ] Initialise bot and start listening for messages
-- [ ] Add message handling
-- [ ] Optimise event handling
-- [ ] Integrate OpenAI into the bot
-- [ ] Manage OpenAI response
-- [ ] Add command prefix
-- [ ] Implement error handling
+- [x] Set up a new Node.js project with `.env`, `openai` and `discord.js` libraries
+- [x] Initialise bot and start listening for messages
+- [x] Add message handling
+- [x] Optimise event handling
+- [x] Integrate OpenAI into the bot
+- [x] Manage OpenAI response
+- [x] Add command prefix
+- [x] Implement error handling
 
 ### Stretch goals
 
