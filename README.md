@@ -64,6 +64,7 @@
     </li>
     <li>
     <li><a href="#installation">Installation</a></li>
+    <li><a href="#usage">Usage</a></li>
     <li><a href="#roadmap">Roadmap</a></li>
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
@@ -96,20 +97,7 @@ Halimah and Adel's second project for Founders and Coders bootcamp: a Discord AI
 
 
 
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
+<!-- INSTALLATION -->
 ## Installation
 
 If you want to install this project on your local machine and play around with it, follow these steps:
@@ -132,6 +120,12 @@ If you want to install this project on your local machine and play around with i
    TOKEN=ENTER-TOKEN-HERE
    API_KEY=ENTER-API-KEY-HERE
    ```
+10. Launch your bot in the terminal so it goes online
+  ```sh
+    node index.js
+  ```
+
+  (Note: you can optionally install `nodemon` so you don't have to launch your bot in the terminal every time you make a change to the code.)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -140,9 +134,16 @@ If you want to install this project on your local machine and play around with i
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+If you want to play around with the bot as it's currently configured, ensure you type `!` before your message, so the bot knows you're talking to it instead of another user. Then ask it any question you'd like.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+To ensure the API Key isn't overloaded, there is a token limit, so you might not get as full an answer as you expect.
+
+You can change this by increasing the `max_tokens` value in `index.js`, line 83:
+```js
+max_tokens: 25,
+```
+
+Make sure to save after making this change!
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
