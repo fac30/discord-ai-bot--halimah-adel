@@ -29,6 +29,8 @@ const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
 // Event listener for incoming messages
 client.on('messageCreate', async msg => {
+	//console.log({msg});
+	
 	// Ignore messages from bots and empty messages
 	if (msg.author.bot || !msg.content) return;
 
@@ -88,11 +90,24 @@ client.on('messageCreate', async msg => {
 
 		const response = chatCompletion.choices[0].message.content;
 		// Console log the chatCompletion respond
-		console.log('OpenAI Response:', response);
+		//console.log('OpenAI Response:', response);
+		//console.log(JSON.stringify(chatCompletion, null, 2));
 
-		console.log(JSON.stringify(chatCompletion, null, 2));
-
+		if (msg.content.startsWith('!private')) {
+			// Direct message the user
+			try {
+				const user = await client.users.fetch(msg.author.id);
+				console.log(`userName: ${user}`);
+				user.send(`In response to your message: "${msg.content}", the AI says: "${response}"`)
+					.then(msg => console.log(`Sent message: ${msg.content} to ${user}`))
+					.catch(console.error);
+			} catch (error) {
+				console.error('Error fetching user or sending direct message:', error);
+			}
+		} else {
 		msg.reply(response);
+		}
+	
 	}
 	catch (error) {
 		console.error('OpenAI Error:', error);
