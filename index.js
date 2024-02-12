@@ -1,9 +1,8 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Partials } = require('discord.js');
 const { OpenAI } = require('openai');
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv/config');
 const token = process.env.TOKEN;
 
 // Create a new client instance
@@ -15,6 +14,10 @@ const client = new Client({
 		GatewayIntentBits.MessageContent,
 		GatewayIntentBits.DirectMessages,
 	],
+	partials: [
+		Partials.Channel,
+		Partials.Message,
+	],
 });
 
 // When the client is ready, run this code (only once).
@@ -23,14 +26,14 @@ const client = new Client({
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready logged! Logged in as ${readyClient.user.tag}`);
 });
-console.log(GatewayIntentBits.DirectMessages);
+
 // Use API Key Directly
 const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
 // Event listener for incoming messages
 client.on('messageCreate', async msg => {
-	//console.log({msg});
-	
+	// console.log({msg});
+
 	// Ignore messages from bots and empty messages
 	if (msg.author.bot || !msg.content) return;
 
@@ -52,7 +55,7 @@ client.on('messageCreate', async msg => {
 
 	// Fetches last 10 messages from the channel
 	try {
-		const conversationHistory = await msg.channel.messages.fetch({ limit: 10});
+		const conversationHistory = await msg.channel.messages.fetch({ limit: 10 });
 		conversationHistory.reverse();
 
 		// For each message fetched, it checks who sent it and pushes to the conversation array
@@ -77,7 +80,7 @@ client.on('messageCreate', async msg => {
 	}
 	catch (error) {
 		console.error('Conversation history error:', error);
-		msg.reply('An error occured while fetching message history. Please try again later.')
+		msg.reply('An error occured while fetching message history. Please try again later.');
 	}
 
 	// Connect to OpenAI with Error Handling
@@ -90,8 +93,8 @@ client.on('messageCreate', async msg => {
 
 		const response = chatCompletion.choices[0].message.content;
 		// Console log the chatCompletion respond
-		//console.log('OpenAI Response:', response);
-		//console.log(JSON.stringify(chatCompletion, null, 2));
+		// console.log('OpenAI Response:', response);
+		// console.log(JSON.stringify(chatCompletion, null, 2));
 
 		if (msg.content.startsWith('!private')) {
 			// Direct message the user
@@ -101,13 +104,15 @@ client.on('messageCreate', async msg => {
 				user.send(`In response to your message: "${msg.content}", the AI says: "${response}"`)
 					.then(msg => console.log(`Sent message: ${msg.content} to ${user}`))
 					.catch(console.error);
-			} catch (error) {
+			}
+			catch (error) {
 				console.error('Error fetching user or sending direct message:', error);
 			}
-		} else {
-		msg.reply(response);
 		}
-	
+		else {
+			msg.reply(response);
+		}
+
 	}
 	catch (error) {
 		console.error('OpenAI Error:', error);
