@@ -13,6 +13,7 @@ const client = new Client({
 		GatewayIntentBits.GuildMembers,
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.MessageContent,
+		GatewayIntentBits.DirectMessages,
 	],
 });
 
@@ -22,7 +23,7 @@ const client = new Client({
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready logged! Logged in as ${readyClient.user.tag}`);
 });
-
+console.log(GatewayIntentBits.DirectMessages);
 // Use API Key Directly
 const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
@@ -43,6 +44,8 @@ client.on('messageCreate', async msg => {
 
 	// Show the bot typing as we wait for a response
 	await msg.channel.sendTyping();
+
+	console.log(msg);
 
 	// Empty array to contain whole conversation, so bot can refer back
 	const conversation = [];
@@ -81,7 +84,7 @@ client.on('messageCreate', async msg => {
 	try {
 		const chatCompletion = await openai.chat.completions.create({
 	  		model: 'gpt-3.5-turbo-1106',
-			messages: conversation, // Changed to capture the conversation history from the array above
+			messages: conversation,
 			max_tokens: 25,
 		});
 
