@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Partials } = require('discord.js');
 const { OpenAI } = require('openai');
 require('dotenv/config');
 const token = process.env.TOKEN;
@@ -13,6 +13,10 @@ const client = new Client({
 		GatewayIntentBits.GuildMessages,
 		GatewayIntentBits.MessageContent,
 		GatewayIntentBits.DirectMessages,
+	],
+	partials: [
+		Partials.Channel,
+		Partials.Message,
 	],
 });
 
