@@ -2,8 +2,7 @@
 // Require the necessary discord.js classes
 const { Client, Events, GatewayIntentBits } = require('discord.js');
 const { OpenAI } = require('openai');
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv/config');
 const token = process.env.TOKEN;
 
 // Create a new client instance
