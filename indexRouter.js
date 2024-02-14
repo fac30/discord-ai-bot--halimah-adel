@@ -1,9 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 // Require the necessary discord.js classes
-const { Client, Events, GatewayIntentBits, Partials } = require('discord.js');
-//const { MessageActionRow, MessageButton } = require('discord.js');
+const { Client, Collection, Events, GatewayIntentBits, Partials } = require('discord.js');
 const { OpenAI } = require('openai');
 require('dotenv/config');
+const fs = require('fs');
+
 const token = process.env.TOKEN;
 
 // Create a new client instance
@@ -21,13 +22,39 @@ const client = new Client({
 	],
 });
 
+
+
+client.commands = new Collection();
+
+//command handler
+//retrieves the command files in an array
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.commands.set(command.data.name, command);
+}
+
+
 // When the client is ready, run this code (only once).
 // The distinction between `client: Client<boolean>` and `readyClient: Client<true>` is important for TypeScript developers.
 // It makes some properties non-nullable.
 client.once(Events.ClientReady, readyClient => {
 	console.log(`Ready logged! Logged in as ${readyClient.user.tag}`);
 
-	
+    command(client, 'createtextchannel', (message) => {
+		const name = message.content.replace('!createtextchannel ', '')
+
+		message.guild.channels
+			.create(name, {
+				type: 'text',
+			})
+			.then((channel) => {
+				console.log(channel)
+			})
+	})
 });
 
 // Use API Key Directly
@@ -37,8 +64,6 @@ const openai = new OpenAI({ apiKey: process.env.API_KEY });
 client.on('messageCreate', async msg => {
 	// console.log({msg});
 
-	
-    
 	// Ignore messages from bots and empty messages
 	if (msg.author.bot || !msg.content) return;
 
@@ -52,7 +77,7 @@ client.on('messageCreate', async msg => {
 
 	// Show the bot typing as we wait for a response
 	await msg.channel.sendTyping();
-	
+
 	console.log(msg);
 
 	// Empty array to contain whole conversation, so bot can refer back
@@ -125,6 +150,17 @@ client.on('messageCreate', async msg => {
   	}
 });
 
+// Event listener for interactions
+client.on(Events.InteractionCreate, async interaction => {
+    if (!interaction.isButton() && interaction.componentType !== 'SELECT_MENU') return;
+
+    if (interaction.isButton() && interaction.customId === 'primaryButton') {
+        await interaction.reply('Primary button clicked!');
+    } else if (interaction.componentType === 'SELECT_MENU' && interaction.customId === 'selectMenu') {
+        await interaction.reply(`Selected option: ${interaction.values.join(', ')}`);
+    }
+});
 
 // Log in to Discord with your client's token
 client.login(token);
+

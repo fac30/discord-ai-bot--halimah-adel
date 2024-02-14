@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('discord.js');
 
 module.exports = {
-    new SlashCommandBuilder()
+	data: new SlashCommandBuilder()
         .setName('ask')
         .setDescription('Ask Hadel Bot a question!'),
     async execute(interaction) {

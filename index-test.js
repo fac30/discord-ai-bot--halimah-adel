@@ -55,7 +55,7 @@ client.on('messageCreate', async (message) => {
 	// Ignore message if the author is a bot
 	if (message.author.bot) return;
 	// Ignore message if it doesn't start with /ask
-	if (!message.content.startsWith('/ask')) return;
+	if (!message.content.startsWith('/button')) return;
 
 	// Show the bot typing as we wait for a response
 	await message.channel.sendTyping();
