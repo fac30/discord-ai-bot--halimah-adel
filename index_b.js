@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-const { Client, Events, GatewayIntentBits, Partials, MessageActionRow, MessageButton } = require('discord.js');
+const { Client, Events, GatewayIntentBits, Partials, ButtonBuilder, MessageActionRow, MessageButton } = require('discord.js');
 const { OpenAI } = require('openai');
 require('dotenv/config');
 const token = process.env.TOKEN;
@@ -72,7 +72,7 @@ client.on('messageCreate', async msg => {
 
         const row = new MessageActionRow()
             .addComponents(
-                new MessageButton()
+                new ButtonBuilder()
                     .setCustomId('explain_more')
                     .setLabel('Explain More')
                     .setStyle('PRIMARY'),

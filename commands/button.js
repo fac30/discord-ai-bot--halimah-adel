@@ -6,21 +6,23 @@ module.exports = {
         .setDescription('Replies with a button!'),
 		
 	async execute(interaction) {
-		//const target = interaction.options.getUser('target');
-		//const reason = interaction.options.getString('reason') ?? 'No reason provided';
-
-		const confirm = new ButtonBuilder()
-			.setCustomId('confirm')
-			.setLabel('Confirm Ban')
+		const explain = new ButtonBuilder()
+			.setCustomId('explain_more')
+			.setLabel('Explain more')
 			.setStyle(ButtonStyle.Danger);
 
-		const cancel = new ButtonBuilder()
-			.setCustomId('cancel')
-			.setLabel('Cancel')
+		const deletes = new ButtonBuilder()
+			.setCustomId('deletes')
+			.setLabel('Delete')
+			.setStyle(ButtonStyle.Secondary);
+
+		const dm = new ButtonBuilder()
+			.setCustomId('dm')
+			.setLabel('Direct message')
 			.setStyle(ButtonStyle.Secondary);
 
 		const row = new ActionRowBuilder()
-			.addComponents(cancel, confirm);
+			.addComponents(explain, deletes, dm);
 
 		await interaction.reply({
 			content: `Are you sure you want to?`,
@@ -28,23 +30,3 @@ module.exports = {
 		});
 	},
 };
-
-
-
-
-	// await interaction.reply({
-	// 	content: `Are you sure you want to ban ${target} for reason: ${reason}?`,
-	// 	components: [row],
-
-	// const row = new MessageActionRow()
-	// 	.addComponents(
-	// 		new MessageButton()
-	// 			.setCustomId('primary')
-	// 			.setLabel('Primary')
-	// 			.setStyle('PRIMARY'),
-			
-	//         new MessageButton()
-	// 			.setCustomId('secondary')
-	// 			.setLabel('Secondary')
-	// 			.setStyle('SECONDARY'),
-	// 	);

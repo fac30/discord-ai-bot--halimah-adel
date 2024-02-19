@@ -42,7 +42,7 @@ module.exports = {
             // console.log('Client User ID:', message.client.user.id);
             // For each message fetched, it checks who sent it and pushes to the conversation array
             conversationHistory.forEach((message) => {
-                if (!message.author.bot && message.author.id !== msg.client.user.id) {
+                if (!message.author.bot && message.author.id !== client.user.id) {
                     
                     //console.log('SentMessage user ID:', message.author.id);
                     //console.log('ReturnedMessage user ID:', msg.client.user.id);
@@ -51,7 +51,7 @@ module.exports = {
                     
                 }
                 // If the author is our bot
-                if (message.author.id === msg.client.user.id) {
+                if (message.author.id === client.user.id) {
                     conversation.push({
                         role: 'assistant',
                         content: message.content,
