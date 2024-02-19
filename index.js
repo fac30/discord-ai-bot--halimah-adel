@@ -2,25 +2,26 @@
 // Require the necessary discord.js classes
 const fs = require('node:fs');
 const path = require('node:path');
+const client = require('./handlers/newClient.js');
 const { Client, Events, GatewayIntentBits, Partials, MessageActionRow, MessageButton } = require('discord.js');
 const { OpenAI } = require('openai');
 require('dotenv/config');
 const token = process.env.TOKEN;
 
 // Create a new client instance
-const client = new Client({
-	intents: [
-		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMembers,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.DirectMessages,
-	],
-	partials: [
-		Partials.Channel,
-		Partials.Message,
-	],
-});
+// const client = new Client({
+// 	intents: [
+// 		GatewayIntentBits.Guilds,
+// 		GatewayIntentBits.GuildMembers,
+// 		GatewayIntentBits.GuildMessages,
+// 		GatewayIntentBits.MessageContent,
+// 		GatewayIntentBits.DirectMessages,
+// 	],
+// 	partials: [
+// 		Partials.Channel,
+// 		Partials.Message,
+// 	],
+// });
 
 // When the client is ready, run this code (only once).
 // The distinction between `client: Client<boolean>` and `readyClient: Client<true>` is important for TypeScript developers.
@@ -63,9 +64,8 @@ client.on('messageCreate', async msg => {
 	try {
 		const conversationHistory = await msg.channel.messages.fetch({ limit: 10 });
 		conversationHistory.reverse();
-		console.log("Client:", client);
+		// console.log("Client:", client);
 		
-
 		// For each message fetched, it checks who sent it and pushes to the conversation array
 		conversationHistory.forEach((message) => {
 			if (message.author.bot && message.author.id !== client.user.id) return;
@@ -147,23 +147,23 @@ for (const file of eventFiles) {
 }
 
 // load the command files on startup
-client.commands = new Collection();
-const commandsPath = path.join(__dirname, "commands");
-const commandFiles = fs
-    .readdirSync(commandsPath)
-    .filter((file) => file.endsWith(".js"));
+// client.commands = new Collection();
+// const commandsPath = path.join(__dirname, "commands");
+// const commandFiles = fs
+//     .readdirSync(commandsPath)
+//     .filter((file) => file.endsWith(".js"));
 
-for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
-    if("data" in command && "execute" in command) {
-        client.commands.set(command.data.name, command); 
-    } else {
-        console.log(
-            `[WARNING] The command at ${filePath} is missing a required "data" or "execute property"`
-        );
-    }
-}
+// for (const file of commandFiles) {
+//     const filePath = path.join(commandsPath, file);
+//     const command = require(filePath);
+//     if("data" in command && "execute" in command) {
+//         client.commands.set(command.data.name, command); 
+//     } else {
+//         console.log(
+//             `[WARNING] The command at ${filePath} is missing a required "data" or "execute property"`
+//         );
+//     }
+// }
 
 // Log in to Discord with your client's token
 client.login(token);

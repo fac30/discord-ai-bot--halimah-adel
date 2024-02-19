@@ -23,6 +23,8 @@ const client = new Client({
 	],
 });
 
+console.log(client);
+
 //load the events files on startup
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs
@@ -61,8 +63,8 @@ for (const file of commandFiles) {
 
 client.login(token);
 
-console.log('client_1:', client);
+// console.log('client_1:', client);
 
 
-module.exports = client;
+module.exports = {client};
 

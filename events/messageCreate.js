@@ -1,10 +1,9 @@
 // import { openApiCall } from './handlers/openApiCall.js';
 const { Events } = require('discord.js');
 const { OpenAI } = require('openai');
+//const { Client, Events, GatewayIntentBits, Partials, MessageActionRow, MessageButton } = require('discord.js');
 const client = require('../indexEven.js');
 // const { openApiCall } = require('./handlers/openApiCall.js');
-
-console.log('client_2:', client);
 
 // Use API Key Directly
 const openai = new OpenAI({ apiKey: process.env.API_KEY });
@@ -12,6 +11,7 @@ const openai = new OpenAI({ apiKey: process.env.API_KEY });
 module.exports = {
     name: Events.MessageCreate,
     async execute(msg) {
+        console.log('client_2:', client);
         //console.log({msg});
         
         // Ignore messages from bots and empty messages
@@ -42,7 +42,7 @@ module.exports = {
             // console.log('Client User ID:', message.client.user.id);
             // For each message fetched, it checks who sent it and pushes to the conversation array
             conversationHistory.forEach((message) => {
-                if (!message.author.bot && message.author.id !== client.user.id) {
+                if (message.author.bot && message.author.id !== client.user.id) {
                     
                     //console.log('SentMessage user ID:', message.author.id);
                     //console.log('ReturnedMessage user ID:', msg.client.user.id);
