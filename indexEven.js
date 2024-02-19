@@ -58,4 +58,11 @@ for (const file of commandFiles) {
     }
 }
 
+
 client.login(token);
+
+console.log('client_1:', client);
+
+
+module.exports = client;
+

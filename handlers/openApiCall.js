@@ -2,6 +2,10 @@ const { Events } = require('discord.js');
 const { OpenAI } = require('openai');
 require('dotenv/config');
 
+module.exports = {
+    openApiCall,
+};
+
 const openApiCall = async (msg) => {
     // Show the bot typing as we wait for a response
     await msg.channel.sendTyping();

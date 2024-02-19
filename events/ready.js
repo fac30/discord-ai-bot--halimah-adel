@@ -5,5 +5,6 @@ module.exports = {
     once: true,
     execute(client){
         console.log(`Ready logged! Logged in as ${client.user.tag}`);
+        console.log( `From log in: ${client.user.id}`);
     }, 
 };
