@@ -1,29 +1,29 @@
 require("dotenv").config();
 const fs = require("node:fs");
 const path = require("node:path");
-
+const client = require('./handlers/newClient.js');
 const token = process.env.TOKEN;
 
 // Require the necessary discord.js classes
 const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
 
 // Create a new client instance
-const client = new Client({
-	intents: [
-		GatewayIntentBits.Guilds,
-		GatewayIntentBits.GuildMembers,
-		GatewayIntentBits.GuildMessages,
-		GatewayIntentBits.MessageContent,
-		GatewayIntentBits.DirectMessages,
-        GatewayIntentBits.DirectMessageReactions,
-	],
-	partials: [
-		Partials.Channel,
-		Partials.Message,
-	],
-});
+// const client = new Client({
+// 	intents: [
+// 		GatewayIntentBits.Guilds,
+// 		GatewayIntentBits.GuildMembers,
+// 		GatewayIntentBits.GuildMessages,
+// 		GatewayIntentBits.MessageContent,
+// 		GatewayIntentBits.DirectMessages,
+//         GatewayIntentBits.DirectMessageReactions,
+// 	],
+// 	partials: [
+// 		Partials.Channel,
+// 		Partials.Message,
+// 	],
+// });
 
-console.log(client);
+// console.log(client);
 
 //load the events files on startup
 const eventsPath = path.join(__dirname, "events");

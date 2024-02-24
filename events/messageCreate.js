@@ -1,19 +1,14 @@
-// import { openApiCall } from './handlers/openApiCall.js';
-const { Events } = require('discord.js');
+const { Events, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require('discord.js');
 const { OpenAI } = require('openai');
-//const { Client, Events, GatewayIntentBits, Partials, MessageActionRow, MessageButton } = require('discord.js');
-const client = require('../indexEven.js');
-// const { openApiCall } = require('./handlers/openApiCall.js');
+const client = require("../handlers/newClient");
+const fetchHistory = require("../handlers/fetchHistory")
 
 // Use API Key Directly
 const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
 module.exports = {
     name: Events.MessageCreate,
-    async execute(msg) {
-        console.log('client_2:', client);
-        //console.log({msg});
-        
+    async execute(msg) {        
         // Ignore messages from bots and empty messages
         if (msg.author.bot || !msg.content) return;
 
@@ -25,55 +20,49 @@ module.exports = {
         // Ignore message if it doesn't start with !
         if (!msg.content.startsWith('!')) return;
 
-        // Make an OpenAPI call
-        //await openApiCall(msg);
+        // Type effect for bot
         await msg.channel.sendTyping();
 
         // Empty array to contain whole conversation, so bot can refer back
-        const conversation = [];
-    
+        // const conversation = [];
+        // console.log(conversation);
         // Fetches last 10 messages from the channel
-        try {
-            const conversationHistory = await msg.channel.messages.fetch({ limit: 10 });
-            //console.log({conversationHistory});
+     
+        // try {
+        //     const conversationHistory = await msg.channel.messages.fetch({ limit: 10 });
+        //     conversationHistory.reverse();
             
-            // console.log('conversationHistory:', await conversationHistory[0]);
-            // console.log('Message Author ID:', message.author.id);
-            // console.log('Client User ID:', message.client.user.id);
-            // For each message fetched, it checks who sent it and pushes to the conversation array
-            conversationHistory.forEach((message) => {
-                if (message.author.bot && message.author.id !== client.user.id) {
-                    
-                    //console.log('SentMessage user ID:', message.author.id);
-                    //console.log('ReturnedMessage user ID:', msg.client.user.id);
-                    //console.log(message.client);
-                    //console.log(client.user);
-                    
-                }
-                // If the author is our bot
-                if (message.author.id === client.user.id) {
-                    conversation.push({
-                        role: 'assistant',
-                        content: message.content,
-                    });
-                    return;
-                }
+        //     // For each message fetched, it checks who sent it and pushes to the conversation array
+        //     conversationHistory.forEach((message) => {
+        //         if (message.author.bot && message.author.id !== client.user.id)
+
+        //         // If the author is our bot
+        //         if (message.author.id === client.user.id) {
+        //             conversation.push({
+        //                 role: 'assistant',
+        //                 content: message.content,
+        //             });
+        //             return;
+        //         }
     
-                // Otherwise, the author is a user
-                conversation.push({
-                    role: 'user',
-                    content: message.content,
-                });
+        //         // Otherwise, the author is a user
+        //         conversation.push({
+        //             role: 'user',
+        //             content: message.content,
+        //         });
                 
-            });
-        }
-        catch (error) {
-            console.error('Conversation history error:', error);
-            msg.reply('An error occured while fetching message history. Please try again later.');
-        }
+        //     });
+        // }
+        // catch (error) {
+        //     console.error('Conversation history error:', error);
+        //     msg.reply('An error occured while fetching message history. Please try again later.');
+        // }
             
         // Connect to OpenAI with Error Handling
         try {
+            const conversation = await fetchHistory(msg);
+            // const isPrivate = msg.content.startsWith('!private');
+            
             const chatCompletion = await openai.chat.completions.create({
                 model: 'gpt-3.5-turbo-1106',
                 messages: conversation,
@@ -81,7 +70,6 @@ module.exports = {
             });
     
             const response = chatCompletion.choices[0].message.content;
-            // Console log the chatCompletion respond
             // console.log('OpenAI Response:', response);
             // console.log(JSON.stringify(chatCompletion, null, 2));
     
@@ -89,26 +77,53 @@ module.exports = {
                 // Direct message the user
                 try {
                     const user = await client.users.fetch(msg.author.id);
-                    console.log(`userName: ${user}`);
+                    //console.log(`userName: ${user}`);
                     user.send(`In response to your message: "${msg.content}", the AI says: "${response}"`)
                         //.then(msg => console.log(`Sent message: ${msg.content} to ${user}`))
                         .catch(console.error);
+                        // Delete the original message
+                    await msg.delete();
+                    
                 }
                 catch (error) {
                     console.error('Error fetching user or sending direct message:', error);
                 }
+                try {
+                    await msg.channel.send(`Your private message has been processed.`)
+                } catch (error) {console.error('Error confirming direct message:', error); }
             }
             else {
-                msg.reply(response);
-            }
+                const explain = new ButtonBuilder()
+                    .setCustomId('explain_more')
+                    .setLabel('Explain more')
+                    .setStyle(ButtonStyle.Primary)               
+
+                const direct = new ButtonBuilder()
+                    .setCustomId('direct_message')
+                    .setLabel('Direct Message')
+                    .setStyle(ButtonStyle.Success) 
+                
+                const google = new ButtonBuilder()
+                    .setLabel('Google')
+                    .setURL('https://www.google.com')
+                    .setStyle(ButtonStyle.Link);
+                
+                const row = new ActionRowBuilder()
+                    .addComponents(explain, direct, google);
+
+                msg.reply({
+                    content: response,
+                    components: [row],
+                });
+
+            } 
     
         }
         catch (error) {
+            console.error('Conversation history error:', error);
             console.error('OpenAI Error:', error);
             msg.reply('An error occurred while processing your request. Please try again later.');
-        }
-
-        
+        }  
     }
 }
 

@@ -3,8 +3,10 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
         .setName('ask')
-        .setDescription('Ask Hadel Bot a question!'),
+        .setDescription('Respond'),
     async execute(interaction) {
+        console.log("interaction");
         await interaction.reply('Ask and I shall answer!')
     },
 };
+

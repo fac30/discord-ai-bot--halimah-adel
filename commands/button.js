@@ -6,9 +6,9 @@ module.exports = {
         .setDescription('Replies with a button!'),
 		
 	async execute(interaction) {
-		const explain = new ButtonBuilder()
-			.setCustomId('explain_more')
-			.setLabel('Explain more')
+		const test = new ButtonBuilder()
+			.setCustomId('test')
+			.setLabel('Test')
 			.setStyle(ButtonStyle.Danger);
 
 		const deletes = new ButtonBuilder()
@@ -19,13 +19,13 @@ module.exports = {
 		const dm = new ButtonBuilder()
 			.setCustomId('dm')
 			.setLabel('Direct message')
-			.setStyle(ButtonStyle.Secondary);
+			.setStyle(ButtonStyle.Success);
 
 		const row = new ActionRowBuilder()
-			.addComponents(explain, deletes, dm);
+			.addComponents(test, deletes, dm);
 
 		await interaction.reply({
-			content: `Are you sure you want to?`,
+			content: `Press a button.`,
 			components: [row],
 		});
 	},
