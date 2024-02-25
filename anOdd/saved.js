@@ -29,6 +29,8 @@ else if (msg.content.startsWith('!dialog')) {
                 .setEmoji('💧') // Set emoji instead of setImage
                 .setValue('squirtle'),
         );
+
+        ':dragon:'
     // const menu = new  MessageSelectMenu()
     //     .setCustomId('example_select_menu')
     //     .setPlaceholder('Select an option')
