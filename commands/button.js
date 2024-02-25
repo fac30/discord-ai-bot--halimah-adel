@@ -6,26 +6,26 @@ module.exports = {
         .setDescription('Replies with a button!'),
 		
 	async execute(interaction) {
-		const test = new ButtonBuilder()
-			.setCustomId('test')
-			.setLabel('Test')
-			.setStyle(ButtonStyle.Danger);
-
 		const deletes = new ButtonBuilder()
 			.setCustomId('deletes')
 			.setLabel('Delete')
+			.setStyle(ButtonStyle.Danger);
+
+		const button = new ButtonBuilder()
+			.setCustomId('button')
+			.setLabel('Button')
 			.setStyle(ButtonStyle.Secondary);
 
-		const dm = new ButtonBuilder()
-			.setCustomId('dm')
-			.setLabel('Direct message')
+		const gratulation = new ButtonBuilder()
+			.setCustomId('gratulation')
+			.setLabel('Gratulation')
 			.setStyle(ButtonStyle.Success);
 
 		const row = new ActionRowBuilder()
-			.addComponents(test, deletes, dm);
+			.addComponents(deletes, button, gratulation);
 
 		await interaction.reply({
-			content: `Press a button.`,
+			content: `Selection of buttons.`,
 			components: [row],
 		});
 	},
