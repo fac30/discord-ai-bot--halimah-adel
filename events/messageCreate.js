@@ -1,10 +1,7 @@
 const { Events, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require('discord.js');
-const { OpenAI } = require('openai');
 const client = require("../handlers/newClient");
-const fetchHistory = require("../handlers/fetchHistory")
+const openApiRequest = require("../handlers/openApiRequest");
 
-// Use API Key Directly
-const openai = new OpenAI({ apiKey: process.env.API_KEY });
 
 module.exports = {
     name: Events.MessageCreate,
@@ -20,44 +17,25 @@ module.exports = {
         // Ignore message if it doesn't start with !
         if (!msg.content.startsWith('!')) return;
 
-        // Type effect for bot
-        await msg.channel.sendTyping();
-      
-            
+        
         // Connect to OpenAI with Error Handling to recieve respond for prompt
         try {
-            const conversation = await fetchHistory(msg);
-            // const isPrivate = msg.content.startsWith('!private');
-            
-            const chatCompletion = await openai.chat.completions.create({
-                model: 'gpt-3.5-turbo-1106',
-                messages: conversation,
-                max_tokens: 25,
-            });
-    
-            const response = chatCompletion.choices[0].message.content;
-            // console.log('OpenAI Response:', response);
-            // console.log(JSON.stringify(chatCompletion, null, 2));
+            // import openAIRequest with fetchHistory of last 10 messages
+            const { response } = await openApiRequest(msg);
             
             // Direct message the openAI respond to the user with the user prompt which will be removed 
             if (msg.content.startsWith('!private')) {
                 try {
                     const user = await client.users.fetch(msg.author.id);
-                    //console.log(`userName: ${user}`);
+                    
                     user.send(`In response to your message: "${msg.content}", the AI says: "${response}"`)
-                        //.then(msg => console.log(`Sent message: ${msg.content} to ${user}`))
-                        .catch(console.error);
+                  
                     // Delete the original message
                     await msg.delete();
-                    
+                    await msg.reply(`Your private message has been processed.`);
                 }
                 catch (error) {
-                    console.error('Error fetching user or sending direct message:', error);
-                }
-                try {
-                    await msg.channel.send(`Your private message has been processed.`)
-                } catch (error) {
-                    console.error('Error confirming direct message:', error); 
+                    console.error('Error during "!private" Direct Message, bc fetching user or dm or confirm dm.', error);
                 }
             }
             //Add Buttons to openAI respond in every prompt
@@ -87,8 +65,7 @@ module.exports = {
             }
         }
         catch (error) {
-            console.error('Conversation history error:', error);
-            console.error('OpenAI Error:', error);
+            console.error('Error during openAI Bot response', error);
             msg.reply('An error occurred while processing your request. Please try again later.');
         }  
     }
