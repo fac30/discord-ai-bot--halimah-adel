@@ -41,9 +41,11 @@ module.exports = {
         // Handel Buttons interaction
         } else if (interaction.isButton()) {
             executeButtons(interaction);
-        } else if (interaction.isStringSelectMenu()) {
-			// respond to the select menu
-		}
+        } 
+        // else if (interaction.isStringSelectMenu()) {
+		// 	const selectedValue = interaction.values[0];
+        //     await interaction.reply(`You selected: ${selectedValue}`);
+		// }
     }
  };
 

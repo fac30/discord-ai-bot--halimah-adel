@@ -22,43 +22,9 @@ module.exports = {
 
         // Type effect for bot
         await msg.channel.sendTyping();
-
-        // Empty array to contain whole conversation, so bot can refer back
-        // const conversation = [];
-        // console.log(conversation);
-        // Fetches last 10 messages from the channel
-     
-        // try {
-        //     const conversationHistory = await msg.channel.messages.fetch({ limit: 10 });
-        //     conversationHistory.reverse();
+      
             
-        //     // For each message fetched, it checks who sent it and pushes to the conversation array
-        //     conversationHistory.forEach((message) => {
-        //         if (message.author.bot && message.author.id !== client.user.id)
-
-        //         // If the author is our bot
-        //         if (message.author.id === client.user.id) {
-        //             conversation.push({
-        //                 role: 'assistant',
-        //                 content: message.content,
-        //             });
-        //             return;
-        //         }
-    
-        //         // Otherwise, the author is a user
-        //         conversation.push({
-        //             role: 'user',
-        //             content: message.content,
-        //         });
-                
-        //     });
-        // }
-        // catch (error) {
-        //     console.error('Conversation history error:', error);
-        //     msg.reply('An error occured while fetching message history. Please try again later.');
-        // }
-            
-        // Connect to OpenAI with Error Handling
+        // Connect to OpenAI with Error Handling to recieve respond for prompt
         try {
             const conversation = await fetchHistory(msg);
             // const isPrivate = msg.content.startsWith('!private');
@@ -72,16 +38,16 @@ module.exports = {
             const response = chatCompletion.choices[0].message.content;
             // console.log('OpenAI Response:', response);
             // console.log(JSON.stringify(chatCompletion, null, 2));
-    
+            
+            // Direct message the openAI respond to the user with the user prompt which will be removed 
             if (msg.content.startsWith('!private')) {
-                // Direct message the user
                 try {
                     const user = await client.users.fetch(msg.author.id);
                     //console.log(`userName: ${user}`);
                     user.send(`In response to your message: "${msg.content}", the AI says: "${response}"`)
                         //.then(msg => console.log(`Sent message: ${msg.content} to ${user}`))
                         .catch(console.error);
-                        // Delete the original message
+                    // Delete the original message
                     await msg.delete();
                     
                 }
@@ -90,8 +56,11 @@ module.exports = {
                 }
                 try {
                     await msg.channel.send(`Your private message has been processed.`)
-                } catch (error) {console.error('Error confirming direct message:', error); }
+                } catch (error) {
+                    console.error('Error confirming direct message:', error); 
+                }
             }
+            //Add Buttons to openAI respond in every prompt
             else {
                 const explain = new ButtonBuilder()
                     .setCustomId('explain_more')
@@ -115,9 +84,7 @@ module.exports = {
                     content: response,
                     components: [row],
                 });
-
-            } 
-    
+            }
         }
         catch (error) {
             console.error('Conversation history error:', error);
