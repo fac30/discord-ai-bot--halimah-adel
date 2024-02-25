@@ -1,3 +1,5 @@
+// from messageCreate.js copied temporary
+
 else if (msg.content.startsWith('!dialog')) {
     // console.log({msg});
     // const deleti = new ButtonBuilder()
