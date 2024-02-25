@@ -217,6 +217,7 @@ And online tutorials. Thanks to the following creators for their excellent tutor
 * Beau Carnes: creating a [Discord bot](https://www.freecodecamp.org/news/create-a-discord-bot-with-javascript-nodejs/)
 * UnderCtrl: creating a [Chat GPT Discord bot](https://www.youtube.com/watch?v=EUlnKW6Yy94&t=1053s)
 * Omnidev: creating a [Discord AI chat bot](https://www.youtube.com/watch?v=TVDHpjLymiM&t=301s)
+* The North Solution: creating a [Create Channel](https://www.youtube.com/@thenorthsolution/videos)
 
 And, of course, huge thanks to [othneildrew](https://github.com/othneildrew) for the comprehensive [README template](https://github.com/othneildrew/Best-README-Template) that we built this README with!
 
