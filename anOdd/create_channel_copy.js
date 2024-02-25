@@ -1,14 +1,14 @@
-const { SlashCommandBuilder, PermissionFlagsBits, ChannelType, GuildCategory } = require('discord.js');
-const client = require("../handlers/newClient");
+const { SlashCommandBuilder, PermissionsBitField, ChannelType, GuildCategory } = require('discord.js');
+// const client = require("../handlers/newClient");
 
 
 module.exports = {
 	data: new SlashCommandBuilder()
         .setName('create-channel')
         .setDescription('Create a custom discord channel')
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
+        .setDefaultMemberPermissions(PermissionsBitField.Flags.ManageChannels)
         .addStringOption(option =>
-            option.setName("channelType")
+            option.setName("channeltype")
             .setRequired(true)
             .setDescription("Set the type of the channel")
             .addChoices(
@@ -25,7 +25,7 @@ module.exports = {
             option.setName("parent")
                 .setDescription("Set the parent of the channel")
                 .setRequired(true)
-                .addChannelTypes([ChannelType.GuildCategory])
+                .addChannelTypes(ChannelType.GuildCategory)
         )
         .addRoleOption(option =>
             option.setName("permission-role")
@@ -41,7 +41,7 @@ module.exports = {
     async execute(interaction) {
 
         const { guild, member, options } = interaction;
-        const { ViewChannel, ReadMessageHistory, SendMessage, Connect, Speak } = PermissionFlagsBits;
+        const { ViewChannel, ReadMessageHistory, SendMessage, Connect, Speak } = PermissionsBitField;
         
         const channeltype = options.getString("channeltype");
         const channelname = options.getString("channelname");
@@ -51,7 +51,7 @@ module.exports = {
 
         if(channeltype === "textchannel") {
             await guild.channels.create({
-                name: `$(channelname)`,
+                name: `${channelname}`,
                 type: ChannelType.GuildText,
                 parent: parent,
 
@@ -70,8 +70,8 @@ module.exports = {
 
         if(channeltype === "voicechannel"){
             await guild.channels.create({
-                name: `$(channelname)`,
-                type: ChannelType.GuildText,
+                name: `${channelname}`,
+                type: ChannelType.GuildVoice,
                 parent: parent,
 
                 permissionOverwrites: [

@@ -5,16 +5,11 @@ const client = require("../handlers/newClient");
 // const fetchHistory = require("../handlers/fetchHistory")
 const executeButtons = require("../handlers/executeButtons")
 
-// Use API Key Directly
-// const openai = new OpenAI({ apiKey: process.env.API_KEY });
-
-
 
 module.exports = {
     name: Events.InteractionCreate,
     async execute(interaction) {
         if (interaction.isChatInputCommand()){
-            // console.log("interaction:", interaction);
  
             const command = interaction.client.commands.get(interaction.commandName);
     
@@ -24,9 +19,10 @@ module.exports = {
                 );
                 return;
             }
-    
+
             try {
                 await command.execute(interaction);
+
             } catch (error) {
                 console.error(error);
                 if (interaction.replied || interaction.deferred) {
