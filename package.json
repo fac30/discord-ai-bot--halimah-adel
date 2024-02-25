@@ -4,7 +4,8 @@
   "description": "Discord AI bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon indexEven.js"
   },
   "keywords": [],
   "author": "",
@@ -14,5 +15,8 @@
     "dotenv": "^16.4.1",
     "eslint": "^8.56.0",
     "openai": "^4.26.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.3"
   }
 }
