@@ -4,8 +4,8 @@
   "description": "Discord AI bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon indexEven.js"
+    "test": "node ./tests/test.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
