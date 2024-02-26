@@ -4,7 +4,7 @@
   "description": "Discord AI bot",
   "main": "index.js",
   "scripts": {
-    "test": "node ./tests/test.js",
+    "test": "node ./tests/test.token.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
@@ -12,7 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "discord.js": "^14.14.1",
-    "dotenv": "^16.4.1",
+    "dotenv": "^16.4.5",
     "openai": "^4.26.1"
   },
   "devDependencies": {
