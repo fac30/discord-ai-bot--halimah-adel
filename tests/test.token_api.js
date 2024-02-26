@@ -22,6 +22,3 @@ test('Test API_KEY is securely loads from .env file', () => {
     assert.ok(process.env.API_KEY.length > 30, 'Token should not be an empty string');
     assert.ok(apiKeyPattern.test(process.env.API_KEY), 'API_KEY should match the expected pattern');
 });
-
-
-
