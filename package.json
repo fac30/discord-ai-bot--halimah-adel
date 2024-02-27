@@ -4,7 +4,7 @@
   "description": "Discord AI bot",
   "main": "index.js",
   "scripts": {
-    "test": "node ./tests/test.ready_Event.js",
+    "test": "node ./tests/test.command_Integrate.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],

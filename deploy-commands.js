@@ -3,7 +3,7 @@ const { REST, Routes } = require("discord.js");
 const {
     CLIENT_ID: clientId,
     GUILD_ID: guildId,
-    DISCORD_TOKEN: token,
+    TOKEN: token,
 } = process.env;
 const fs = require("node:fs");
  

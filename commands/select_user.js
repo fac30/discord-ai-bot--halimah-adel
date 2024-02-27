@@ -20,7 +20,7 @@ module.exports = {
 			.setMinValues(1)
 			.setMaxValues(10);
 
-			const row1 = new ActionRowBuilder()
+		const row1 = new ActionRowBuilder()
 			.addComponents(roleSelect);
 		
 		const row2 = new ActionRowBuilder()
