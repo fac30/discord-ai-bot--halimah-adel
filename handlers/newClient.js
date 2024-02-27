@@ -1,4 +1,4 @@
-const { Client, Events, GatewayIntentBits, Partials } = require('discord.js');
+const { Client, GatewayIntentBits, Partials } = require('discord.js');
 require('dotenv/config');
 const token = process.env.TOKEN;
 

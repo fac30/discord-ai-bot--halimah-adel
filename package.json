@@ -4,19 +4,23 @@
   "description": "Discord AI bot",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon indexEven.js"
+    "test": "node ./tests/test.command_Integrate.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "discord.js": "^14.14.1",
-    "dotenv": "^16.4.1",
-    "eslint": "^8.56.0",
+    "dotenv": "^16.4.5",
     "openai": "^4.26.1"
   },
   "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-n": "^16.6.2",
+    "eslint-plugin-promise": "^6.1.1",
     "nodemon": "^3.0.3"
   }
 }
