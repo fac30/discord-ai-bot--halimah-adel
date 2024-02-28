@@ -5,7 +5,8 @@ const openApiRequest = require("../handlers/openApiRequest");
 
 module.exports = {
     name: Events.MessageCreate,
-    async execute(msg) {        
+    async execute(msg) {
+        console.log({msg});
         // Ignore messages from bots and empty messages
         if (msg.author.bot || !msg.content) return;
 

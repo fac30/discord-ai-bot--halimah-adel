@@ -4,7 +4,11 @@
   "description": "Discord AI bot",
   "main": "index.js",
   "scripts": {
-    "test": "node ./tests/test.command_Integrate.js",
+    "ready-test": "node ./tests/test.ready_Event.js",
+    "openai-test": "node ./tests/test.openai_api.js",
+    "command-test": "node ./tests/test.command_Integrate.js",
+    "message-test": "node ./tests/test.messageCreate.js",
+    "token-test": "node ./tests/test.token_api.js",
     "dev": "nodemon index.js"
   },
   "keywords": [],
