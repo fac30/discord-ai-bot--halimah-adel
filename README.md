@@ -179,6 +179,16 @@ See the [open issues](https://github.com/fac30/discord-ai-bot--halimah-adel/issu
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+<!-- TESTING -->
+## Testing
+
+"Writing tests is an important part of software development. It allows you to ensure that your code works as intended and catches any potential bugs or errors before they make it into production."
+
+# // import tester liabaries
+const assert = require('assert');
+const test = require('node:test');
+let result, expected
+
 
 <!-- CONTRIBUTING -->
 ## Contributing
