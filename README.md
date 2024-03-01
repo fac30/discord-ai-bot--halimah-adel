@@ -184,7 +184,7 @@ See the [open issues](https://github.com/fac30/discord-ai-bot--halimah-adel/issu
 
 "Writing tests is an important part of software development. It allows you to ensure that your code works as intended and catches any potential bugs or errors before they make it into production."
 
-In out Discord Bot project, we use the built in node.js test library.
+In our Discord Bot project, we use the built in Node.js test library.
 
 It requires the following steps: 
   * import the tester libary in each test file
@@ -193,10 +193,10 @@ It requires the following steps:
     const test = require('node:test');
     ```
 
-  * write a test useing assert method,
-    create an expected and recieved value, which the test will compare with the assert.
+  * write a test using assert method,
+    create an expected and received value, which the test will compare with the assert.
 
-    | Method | Descreption |
+    | Method | Description |
     |  :---:  |  :---:  |
     | assert.deepEqual | Checks if two values are equal |
     | assert.strictEqual | Checks if two values are equal |
@@ -207,12 +207,12 @@ It requires the following steps:
     | assert.ok | Check if a value is true |
 
 
-  * An example of test
+  * An example of a test
     ```sh
-      test('descreption of the test', () => {
+      test('description of the test', () => {
           try {
             assert.strictEqual(typeof variable, 'object', 'variable should be an object');
-            assert.ok(variable instanceof Class, true, 'varible should be an instance of discord.js Class');
+            assert.ok(variable instanceof Class, true, 'variable should be an instance of discord.js Class');
           } catch (error) {
               assert.fail(`event failed: ${error.message}`);
           }
@@ -222,7 +222,7 @@ It requires the following steps:
   * Add the testable test file to the package.json
     ```
     "scripts": {
-        "ready-test": "node ./tests/test.nameOfTest.js",
+        "name-test": "node ./tests/test.nameOfTest.js",
      },
     ```
 
@@ -269,7 +269,7 @@ And online tutorials. Thanks to the following creators for their excellent tutor
 * Beau Carnes: creating a [Discord bot](https://www.freecodecamp.org/news/create-a-discord-bot-with-javascript-nodejs/)
 * UnderCtrl: creating a [Chat GPT Discord bot](https://www.youtube.com/watch?v=EUlnKW6Yy94&t=1053s)
 * Omnidev: creating a [Discord AI chat bot](https://www.youtube.com/watch?v=TVDHpjLymiM&t=301s)
-* EvenMoreCode: creating a [Discord File Structure: handeling commands and events](https://www.youtube.com/watch?v=N3rNVWBOaS8&list=PLGR8P08gl389KuHZjU9QCZlIMioUAIKcl&index=4)
+* EvenMoreCode: creating a [Discord File Structure: handling commands and events](https://www.youtube.com/watch?v=N3rNVWBOaS8&list=PLGR8P08gl389KuHZjU9QCZlIMioUAIKcl&index=4)
 
 
 And, of course, huge thanks to [othneildrew](https://github.com/othneildrew) for the comprehensive [README template](https://github.com/othneildrew/Best-README-Template) that we built this README with!
