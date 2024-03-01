@@ -9,7 +9,7 @@ const openai = new OpenAI({ apiKey: process.env.API_KEY })
 const openApiRequest = async (msg) => {
   try {
     // Type effect while bot fetch respond from openAI
-    await msg.channel.sendTyping()
+    // await msg.channel.sendTyping()
 
     const conversation = await fetchHistory(msg)
 

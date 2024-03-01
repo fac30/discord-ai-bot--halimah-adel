@@ -9,24 +9,36 @@ const assert = require('assert')
 const test = require('node:test')
 
 // import the necessary library and .env variables
-const openApiRequest = require('../handlers/openApiRequest.js');
-const messageCreate = require('../events/messageCreate.js');
+const client = require('../handlers/newClient')
+const openApiRequest = require('../handlers/openApiRequest.js')
+const fetchHistory = require('../handlers/fetchHistory.js')
 require('dotenv/config')
-
 
 // Test OpenAI Library Integration
 test('Test bot is integrated with OpenAI and successfully creates an API request', async () => {
-    
-    try {
-        const prompt = 'hello'
-
-
+  const TestPrompt = {
+    channelId: process.env.CHANNEL_ID,
+    guildId: process.env.GUILD_ID,
+    content: '!what is 2 + 2',
+    author: User = {
+      bot: false
+    },
+    reply: async (response) => {
+      try {
+        console.log('word');
+        assert.strictEqual(response, '2 + 2 equals 4.')
+      } catch (error) {
+        assert.fail(`OpenAI Library Integration failed: ${error.message}`)
+      }
     }
-  assert.strictEqual(typeof client, 'object', 'Client should be an object')
-  assert.ok(client instanceof Client, true, 'Client should be an instance of discord.js Client')
-})
+  }
 
-await messageCreate.execute(prompt)
+  // Simulate message to bot for AI
+  await openApiRequest(TestPrompt)
+
+  // Clean up after test is complete
+  client.destroy()
+})
 
 // Test inside that the fetch to OpenAI API works i.e. status 200 (works), status 400 (error)
 
