@@ -191,10 +191,10 @@ It requires the following steps:
     ```sh
     const assert = require('assert');
     const test = require('node:test');
-   ```
+    ```
 
   * write a test useing assert method,
-    create an expected and recieved value, which the test will coompare with the assert.
+    create an expected and recieved value, which the test will compare with the assert.
 
     | Method | Descreption |
     |  :---:  |  :---:  |
@@ -209,14 +209,14 @@ It requires the following steps:
 
   * An example of test
     ```sh
-    test('descreption of the test', () => {
-        try {
-          assert.strictEqual(typeof variable, 'object', 'variable should be an object');
-          assert.ok(variable instanceof Class, true, 'varible should be an instance of discord.js Class');
-        } catch (error) {
-            assert.fail(`event failed: ${error.message}`);
-        }
-    });
+      test('descreption of the test', () => {
+          try {
+            assert.strictEqual(typeof variable, 'object', 'variable should be an object');
+            assert.ok(variable instanceof Class, true, 'varible should be an instance of discord.js Class');
+          } catch (error) {
+              assert.fail(`event failed: ${error.message}`);
+          }
+      });
     ```
 
   * Add the testable test file to the package.json
