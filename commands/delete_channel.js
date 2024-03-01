@@ -1,10 +1,10 @@
-const { SlashCommandBuilder, PermissionFlagsBits} = require('discord.js');
+const { SlashCommandBuilder, PermissionsBitField} = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
         .setName("delete_channel")
         .setDescription("Delet a custom discord channel")
-        .setDefaultMemberPermissions(PermissionFlagsBits.ManageChannels)
+        .setDefaultMemberPermissions(PermissionsBitField.ManageChannels)
         .addChannelOption(option =>
             option.setName("channel")
             .setDescription("Select the channel you wanna delete.")
@@ -16,7 +16,7 @@ module.exports = {
 
         const channel = options.getChannel("channel")
 
-        channel.delete()
+        await channel.delete()
 
         await interaction.reply({ content: "The channel was successfully deleted.", ephemeral: true })
 
