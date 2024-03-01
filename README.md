@@ -192,6 +192,7 @@ It requires the following steps:
     const assert = require('assert');
     const test = require('node:test');
    ```
+
   * write a test useing assert method,
     create an expected and recieved value, which the test will coompare with the assert.
 
@@ -205,6 +206,7 @@ It requires the following steps:
     | assert.ifError | Throw a specified error if the specified error evaluates to true |
     | assert.ok | Check if a value is true |
 
+
   * An example of test
     ```sh
     test('descreption of the test', () => {
@@ -216,12 +218,14 @@ It requires the following steps:
         }
     });
     ```
+
   * Add the testable test file to the package.json
     ```
     "scripts": {
         "ready-test": "node ./tests/test.nameOfTest.js",
      },
     ```
+
   * run the test in the terminal
     ```sh
     npm run test
