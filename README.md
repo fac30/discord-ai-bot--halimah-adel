@@ -184,10 +184,48 @@ See the [open issues](https://github.com/fac30/discord-ai-bot--halimah-adel/issu
 
 "Writing tests is an important part of software development. It allows you to ensure that your code works as intended and catches any potential bugs or errors before they make it into production."
 
-# // import tester liabaries
-const assert = require('assert');
-const test = require('node:test');
-let result, expected
+In out Discord Bot project, we use the built in node.js test library.
+
+It requires the following steps: 
+  * import the tester libary in each test file
+    ```sh
+    const assert = require('assert');
+    const test = require('node:test');
+   ```
+  * write a test useing assert method,
+    create an expected and recieved value, which the test will coompare with the assert.
+
+    | Method | Descreption |
+    |  :---:  |  :---:  |
+    | assert.deepEqual | Checks if two values are equal |
+    | assert.strictEqual | Checks if two values are equal |
+    | assert.notDeepEqual | Checks if two value are not equal |
+    | assert.notStrictEqual | Checks if two value are not equal |
+    | assert.fail | throw an Assertion Error |
+    | assert.ifError | Throw a specified error if the specified error evaluates to true |
+    | assert.ok | Check if a value is true |
+
+  * An example of test
+    ```sh
+    test('descreption of the test', () => {
+        try {
+          assert.strictEqual(typeof variable, 'object', 'variable should be an object');
+          assert.ok(variable instanceof Class, true, 'varible should be an instance of discord.js Class');
+        } catch (error) {
+            assert.fail(`event failed: ${error.message}`);
+        }
+    });
+    ```
+  * Add the testable test file to the package.json
+    ```
+    "scripts": {
+        "ready-test": "node ./tests/test.nameOfTest.js",
+     },
+    ```
+  * run the test in the terminal
+    ```sh
+    npm run test
+    ```
 
 
 <!-- CONTRIBUTING -->
