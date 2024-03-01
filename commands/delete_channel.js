@@ -3,8 +3,8 @@ const { SlashCommandBuilder, PermissionsBitField} = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
         .setName("delete_channel")
-        .setDescription("Delet a custom discord channel")
-        .setDefaultMemberPermissions(PermissionsBitField.ManageChannels)
+        .setDescription("Delete a custom discord channel")
+        .setDefaultMemberPermissions(PermissionsBitField.Flags.ManageChannels)
         .addChannelOption(option =>
             option.setName("channel")
             .setDescription("Select the channel you wanna delete.")

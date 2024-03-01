@@ -49,25 +49,6 @@ module.exports = {
         const permissions = options.getRole("permission-role");
         const everyone = options.getRole("everyone");
 
-        if(channeltype === "voicechannel"){
-            await interaction.guild.channels.create({
-                name: `${channelname}`,
-                type: ChannelType.GuildVoice,
-                parent: parent,
-
-                permissionOverwrites: [
-                 {
-                    id: permissions,
-                    allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.Connect, PermissionsBitField.Flags.Speak],
-                 }, 
-                 {
-                    id: everyone,
-                    deny: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.Connect, PermissionsBitField.Flags.Speak],
-                 }
-                ]
-            })
-        }
-
         if(channeltype === "textchannel") {
             await interaction.guild.channels.create({
                 name: `${channelname}`,
@@ -77,17 +58,34 @@ module.exports = {
                 permissionOverwrites: [
                  {
                     id: permissions,
-                    allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ReadMessageHistory],
+                    allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ReadMessageHistory, PermissionsBitField.Flags.ManageChannels],
                  }, 
                  {
                     id: everyone,
-                    deny: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ReadMessageHistory],
+                    deny: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ReadMessageHistory, PermissionsBitField.Flags.ManageChannels],
                  }
                 ]
             })
         }
 
+        if(channeltype === "voicechannel"){
+            await interaction.guild.channels.create({
+                name: `${channelname}`,
+                type: ChannelType.GuildVoice,
+                parent: parent,
 
+                permissionOverwrites: [
+                 {
+                    id: permissions,
+                    allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.Connect, PermissionsBitField.Flags.Speak, PermissionsBitField.Flags.ManageChannels],
+                 }, 
+                 {
+                    id: everyone,
+                    deny: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.Connect, PermissionsBitField.Flags.Speak, PermissionsBitField.Flags.ManageChannels],
+                 }
+                ]
+            })
+        }
 
         await interaction.reply({ content: "The channel was successfully created.", ephemeral: true })
 
