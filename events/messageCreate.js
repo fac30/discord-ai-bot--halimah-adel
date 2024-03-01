@@ -8,6 +8,12 @@ module.exports = {
     console.log({ msg })
     // Ignore messages from bots and empty messages
     if (msg.author.bot || !msg.content) return
+    name: Events.MessageCreate,
+    async execute(msg) {        
+        console.log({msg});
+
+        // Ignore messages from bots and empty messages
+        if (msg.author.bot || !msg.content) return;
 
     // Test chat connection
     if (msg.content === 'hello') {
