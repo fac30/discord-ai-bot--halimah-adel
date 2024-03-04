@@ -23,7 +23,7 @@ test("Test bot's message event listener functionality", async () => {
   const TestMessage = {
     guildId: process.env.GUILD_ID,
     content: 'hello',
-    author: User = {
+    author: {
       bot: false
     },
     reply: async (response) => {
