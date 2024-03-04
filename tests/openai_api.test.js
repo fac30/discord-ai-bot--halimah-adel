@@ -20,7 +20,7 @@ test('Test bot is integrated with OpenAI and successfully creates an API request
     channelId: process.env.CHANNEL_ID,
     guildId: process.env.GUILD_ID,
     content: '!what is 2 + 2',
-    author: User = {
+    author: {
       bot: false
     },
     channel: {
