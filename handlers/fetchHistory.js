@@ -6,7 +6,6 @@ async function fetchHistory (msg) {
   // console.log(conversation);
 
   try {
-    console.log(msg.channel);
     const conversationChannel = await msg.channel.fetch(process.env.CHANNEL_ID)
     const conversationHistory = await conversationChannel.messages.fetch({ limit: 10 })
     conversationHistory.reverse()

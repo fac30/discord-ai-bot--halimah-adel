@@ -11,7 +11,15 @@ const openApiRequest = async (msg) => {
     // Type effect while bot fetch respond from openAI
     // await msg.channel.sendTyping()
 
-    const conversation = await fetchHistory(msg)
+    let conversation
+    if (!msg.channel) {
+      conversation = [{
+        role: 'user',
+        content: msg.content
+      }]
+    } else {
+      conversation = await fetchHistory(msg)
+    }
 
     // Post prompt and Get openAI response
     const chatCompletion = await openai.chat.completions.create({

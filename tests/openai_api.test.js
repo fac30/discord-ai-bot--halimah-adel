@@ -23,9 +23,6 @@ test('Test bot is integrated with OpenAI and successfully creates an API request
     author: {
       bot: false
     },
-    channel: {
-      messages: '!what is 2 + 2'
-    },
     reply: async (response) => {
       try {
         console.log('word');
