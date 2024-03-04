@@ -9,7 +9,7 @@ const assert = require('assert')
 const test = require('node:test')
 
 // import the necessary library and .env variables
-const client = require('../handlers/newClient')
+const client = require('../handlers/newClient.js')
 const openApiRequest = require('../handlers/openApiRequest.js')
 const fetchHistory = require('../handlers/fetchHistory.js')
 require('dotenv/config')
@@ -22,6 +22,9 @@ test('Test bot is integrated with OpenAI and successfully creates an API request
     content: '!what is 2 + 2',
     author: User = {
       bot: false
+    },
+    channel: {
+      messages: '!what is 2 + 2'
     },
     reply: async (response) => {
       try {

@@ -10,7 +10,7 @@ const test = require('node:test')
 
 // import the necessary library and .env variables
 const { Events } = require('discord.js')
-const client = require('../handlers/newClient')
+const client = require('../handlers/newClient.js')
 const messageCreate = require('../events/messageCreate.js')
 require('dotenv/config')
 
