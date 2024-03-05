@@ -26,6 +26,7 @@ test('Test bot is integrated with OpenAI and successfully creates an API request
     reply: async (response) => {
       try {
         console.log('word');
+        assert.ok(typeof response, 'string', 'Response is correctly returned as a string')
         assert.strictEqual(response, '2 + 2 equals 4.')
       } catch (error) {
         assert.fail(`OpenAI Library Integration failed: ${error.message}`)
