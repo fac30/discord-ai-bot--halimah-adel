@@ -10,7 +10,7 @@ const test = require('node:test')
 
 // import the necessary library and .env variables
 const { Events } = require('discord.js')
-const client = require('../handlers/newClient')
+const client = require('../handlers/newClient.js')
 const messageCreate = require('../events/messageCreate.js')
 require('dotenv/config')
 
@@ -23,7 +23,7 @@ test("Test bot's message event listener functionality", async () => {
   const TestMessage = {
     guildId: process.env.GUILD_ID,
     content: 'hello',
-    author: User = {
+    author: {
       bot: false
     },
     reply: async (response) => {
