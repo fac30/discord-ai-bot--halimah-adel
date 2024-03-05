@@ -11,7 +11,6 @@ const test = require('node:test')
 // import the necessary library and .env variables
 const client = require('../handlers/newClient.js')
 const openApiRequest = require('../handlers/openApiRequest.js')
-const fetchHistory = require('../handlers/fetchHistory.js')
 require('dotenv/config')
 
 // Test OpenAI Library Integration
